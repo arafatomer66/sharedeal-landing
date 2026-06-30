@@ -421,9 +421,10 @@ html[lang="bn"] [lang-bn]{display:inline}
   .fcols{grid-template-columns:1fr 1fr}
 }
 @media (max-width:640px){
-  section{padding:60px 0}
-  .steps,.fgrid,.tgrid,.tst-grid,.fcols,.games-grid,.pgrid,.livenow .pgrid,.earn-grid{grid-template-columns:1fr}
-  .strip-grid{grid-template-columns:repeat(2,1fr)}
+  section{padding:48px 0}
+  .steps,.fgrid,.tst-grid,.fcols{grid-template-columns:1fr}
+  /* keep dense sections 2-up on phones to cut page length */
+  .strip-grid,.tgrid,.games-grid,.earn-grid,.pgrid,.livenow .pgrid{grid-template-columns:repeat(2,1fr)}
   .neta,.aud,.cta{padding:30px}.hero-stats{gap:20px}
   .nav-cta .btn-primary{display:none}
   .subnav{top:64px}.nav{height:64px}
