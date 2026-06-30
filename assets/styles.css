@@ -118,11 +118,13 @@ header.scrolled{border-color:var(--border);box-shadow:0 4px 20px rgba(15,22,32,.
 .strip-grid span{font-size:13px;opacity:.85}
 
 /* Steps */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:46px}
-.step{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;transition:.25s}
+.steps{display:flex;align-items:stretch;gap:0;margin-top:46px}
+.step{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;transition:.25s}
 .step:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--brand-soft)}
-.step .n{width:46px;height:46px;border-radius:13px;background:var(--brand);color:#fff;font-weight:900;font-size:20px;display:grid;place-items:center;margin-bottom:18px}
+.step-ic{width:68px;height:68px;border-radius:20px;background:var(--brand-soft);display:grid;place-items:center;font-size:34px;margin-bottom:18px;box-shadow:inset 0 0 0 1px rgba(35,105,36,.08)}
+.step .n{position:absolute;top:26px;right:26px;width:30px;height:30px;border-radius:50%;background:var(--brand);color:#fff;font-weight:900;font-size:14px;display:grid;place-items:center;margin:0;border:2px solid #fff;box-shadow:0 4px 10px rgba(35,105,36,.25)}
 .step h3{font-size:20px;margin-bottom:8px}.step p{color:var(--ink-2);font-size:15px}
+.step-flow{flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:var(--brand-mid);font-size:30px;font-weight:800;padding:0 6px}
 
 /* Audience split */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:28px}
@@ -412,7 +414,8 @@ html[lang="bn"] [lang-bn]{display:inline}
   .feat-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:26px auto 0;max-width:460px}
   .split,.neta,.social-grid{grid-template-columns:1fr}
   .strip-grid,.games-grid{grid-template-columns:repeat(2,1fr)}
-  .steps,.fgrid,.tgrid,.tst-grid{grid-template-columns:1fr 1fr}
+  .fgrid,.tgrid,.tst-grid{grid-template-columns:1fr 1fr}
+  .steps{flex-direction:column}.step-flow{transform:rotate(90deg);padding:8px 0}
   .pgrid,.livenow .pgrid{grid-template-columns:repeat(3,1fr)}
   .pd-grid{grid-template-columns:1fr}.pd-gallery{position:static}
   .reviews{grid-template-columns:1fr}
@@ -424,10 +427,12 @@ html[lang="bn"] [lang-bn]{display:inline}
 @media (max-width:640px){
   section{padding:48px 0}
   /* horizontal reward cards read best full-width on phones */
-  .steps,.fgrid,.tst-grid,.fcols,.earn-grid{grid-template-columns:1fr}
+  .fgrid,.tst-grid,.fcols,.earn-grid{grid-template-columns:1fr}
   /* vertical-content grids stay 2-up; minmax(0,1fr) + min-width:0 lets tracks AND items shrink so cards never overflow */
-  .strip-grid,.tgrid,.games-grid,.pgrid,.livenow .pgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-  .strip-grid>*,.tgrid>*,.games-grid>*,.pgrid>*,.livenow .pgrid>*{min-width:0}
+  .strip-grid,.tgrid,.games-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .strip-grid>*,.tgrid>*,.games-grid>*{min-width:0}
+  /* deal/product cards read best full-width on phones (big image, clear price) */
+  .pgrid,.livenow .pgrid{grid-template-columns:minmax(0,1fr)}
   /* compact the big game + trust cards so 2-up reads well on phones */
   .game{padding:16px;min-height:152px}
   .game .gi{font-size:30px;margin-bottom:8px}.game h3{font-size:15px}.game p{font-size:12px}
@@ -440,7 +445,7 @@ html[lang="bn"] [lang-bn]{display:inline}
   .pd{padding-bottom:90px}
   .pc-img{height:130px;font-size:48px}
 }
-@media (max-width:420px){ .pgrid{grid-template-columns:repeat(2,minmax(0,1fr))} .pc-name{font-size:13px} .pc-now{font-size:17px} .pc-img{height:120px;font-size:42px} .pc-body{padding:11px} }
+@media (max-width:420px){ .pc-name{font-size:14px} .pc-now{font-size:18px} }
 
 /* ============================================================
    VISUAL POLISH — make every section pop (no layout/width change)
@@ -726,3 +731,25 @@ section[id]{scroll-margin-top:90px}
 .legal-toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
 .legal-toc a{font-size:13px;font-weight:600;color:var(--brand);background:var(--brand-soft);border-radius:999px;padding:6px 13px}
 .legal-toc a:hover{text-decoration:none;background:#dcefd8}
+
+/* ===== Flow diagram — farm-to-para model at a glance ===== */
+.flowdiag{background:var(--surface)}
+.fd{display:flex;align-items:flex-start;justify-content:center;gap:4px;margin-top:46px}
+.fd-node{flex:1;max-width:180px;display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center}
+.fd-c{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;font-size:30px;flex:none;box-shadow:0 8px 20px rgba(15,22,32,.10)}
+.fd-c.c-soft{background:var(--brand-soft)}
+.fd-c.c-hub{background:linear-gradient(135deg,var(--brand),var(--brand-mid));color:#fff;font-weight:900;font-size:26px}
+.fd-c.c-pink{background:linear-gradient(135deg,#ec4899,#f472b6)}
+.fd-c.c-amber{background:linear-gradient(135deg,#f59e0b,#fbbf24)}
+.fd-node b{font-size:14px;color:var(--ink)}
+.fd-node small{font-size:12px;color:var(--ink-3);line-height:1.4}
+.fd-link{flex:1;min-width:14px;max-width:54px;height:3px;margin-top:31px;border-radius:2px;background:repeating-linear-gradient(90deg,var(--brand-mid) 0 6px,transparent 6px 12px);opacity:.7}
+@media (max-width:760px){
+  .fd{flex-direction:column;align-items:stretch;gap:0;max-width:360px;margin-inline:auto}
+  .fd-node{display:grid;grid-template-columns:auto 1fr;column-gap:15px;align-items:center;text-align:left;max-width:none}
+  .fd-node .fd-c{grid-row:1 / span 2;width:54px;height:54px;font-size:26px}
+  .fd-c.c-hub{font-size:22px}
+  .fd-node b{grid-column:2;align-self:end}
+  .fd-node small{grid-column:2;align-self:start}
+  .fd-link{width:3px;height:22px;min-width:0;max-width:none;margin:5px 0 5px 25px;background:repeating-linear-gradient(180deg,var(--brand-mid) 0 6px,transparent 6px 12px)}
+}
