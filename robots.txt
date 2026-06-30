@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sharedeal.app/sitemap.xml
