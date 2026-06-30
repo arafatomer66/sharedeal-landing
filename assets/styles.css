@@ -665,3 +665,34 @@ section[id]{scroll-margin-top:90px}
 .fsocial a:hover{background:var(--brand);color:#fff;text-decoration:none}
 .fcompany{max-width:70ch;line-height:1.5}.fcompany b{color:#aebccc}
 .fcopy{white-space:nowrap}
+
+/* ===== Animated community loop ===== */
+.loop{background:var(--brand-wash);position:relative;overflow:hidden}
+.loop-stage{max-width:540px;margin:26px auto 0}
+.loop-svg{width:100%;height:auto;overflow:visible;display:block}
+/* connection lines — flowing dashes (people connecting / following) */
+.loop-svg .lk{stroke-dasharray:10 14;animation:lkflow 1.8s linear infinite}
+.loop-svg .lk.ring{opacity:.4;stroke-dasharray:6 12;animation-duration:2.6s}
+@keyframes lkflow{to{stroke-dashoffset:-48}}
+/* nodes (people) gently bob, staggered */
+.loop-node{transform-box:fill-box;transform-origin:center;animation:nodebob 4s ease-in-out infinite}
+.loop-node.n2{animation-delay:.5s}.loop-node.n3{animation-delay:1s}.loop-node.n4{animation-delay:1.5s}.loop-node.n5{animation-delay:2s}
+@keyframes nodebob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+/* hub (the shared deal) pulses */
+.loop-hub{transform-box:fill-box;transform-origin:center;animation:hubpulse 3s ease-in-out infinite}
+@keyframes hubpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+/* dashed orbit ring slowly rotates */
+.loop-orbit{transform-box:fill-box;transform-origin:center;animation:lspin 16s linear infinite}
+@keyframes lspin{to{transform:rotate(360deg)}}
+/* coins (rewards) float up from the hub */
+.loop-coins .coin{transform-box:fill-box;transform-origin:center;animation:coinup 3.2s ease-in infinite}
+.coin.c2{animation-delay:1.05s}.coin.c3{animation-delay:2.1s}
+@keyframes coinup{0%{transform:translateY(0) scale(.55);opacity:0}16%{opacity:1}78%{opacity:1}100%{transform:translateY(-130px) scale(1);opacity:0}}
+/* step pills */
+.loop-steps{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:34px}
+.lstep{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:10px 18px;font-weight:700;font-size:14px;box-shadow:var(--shadow-xs)}
+.lstep b{font-size:17px;font-weight:400;line-height:1}
+@media (prefers-reduced-motion:reduce){
+  .loop-svg .lk,.loop-node,.loop-hub,.loop-orbit,.loop-coins .coin{animation:none}
+  .loop-coins{display:none}
+}
