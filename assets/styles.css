@@ -672,8 +672,13 @@ section[id]{scroll-margin-top:90px}
 .loop-svg{width:100%;height:auto;overflow:visible;display:block}
 /* connection lines — flowing dashes (people connecting / following) */
 .loop-svg .lk{stroke-dasharray:10 14;animation:lkflow 1.8s linear infinite}
-.loop-svg .lk.ring{opacity:.4;stroke-dasharray:6 12;animation-duration:2.6s}
+.loop-svg .lk.ring{opacity:.35;stroke-dasharray:6 12;animation:none}
 @keyframes lkflow{to{stroke-dashoffset:-48}}
+/* traveling pulse lights each node in sequence (Connect→Follow→Buy→Save→Reward) */
+.loop-pings .ping{transform-box:fill-box;transform-origin:center;opacity:0;animation:nodeping 6s linear infinite}
+.ping.p2{animation-delay:1.2s}.ping.p3{animation-delay:2.4s}.ping.p4{animation-delay:3.6s}.ping.p5{animation-delay:4.8s}
+@keyframes nodeping{0%{transform:scale(1);opacity:.75}18%{transform:scale(1.85);opacity:0}100%{transform:scale(1.85);opacity:0}}
+.tdot{filter:drop-shadow(0 0 5px rgba(76,191,66,.9))}
 /* nodes (people) gently bob, staggered */
 .loop-node{transform-box:fill-box;transform-origin:center;animation:nodebob 4s ease-in-out infinite}
 .loop-node.n2{animation-delay:.5s}.loop-node.n3{animation-delay:1s}.loop-node.n4{animation-delay:1.5s}.loop-node.n5{animation-delay:2s}
@@ -693,6 +698,6 @@ section[id]{scroll-margin-top:90px}
 .lstep{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:10px 18px;font-weight:700;font-size:14px;box-shadow:var(--shadow-xs)}
 .lstep b{font-size:17px;font-weight:400;line-height:1}
 @media (prefers-reduced-motion:reduce){
-  .loop-svg .lk,.loop-node,.loop-hub,.loop-orbit,.loop-coins .coin{animation:none}
-  .loop-coins{display:none}
+  .loop-svg .lk,.loop-node,.loop-hub,.loop-orbit,.loop-coins .coin,.loop-pings .ping{animation:none}
+  .loop-coins,.tdot{display:none}
 }
