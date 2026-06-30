@@ -397,6 +397,7 @@ html[lang="bn"] [lang-bn]{display:inline}
 .earn{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px;display:flex;align-items:center;gap:16px;transition:.2s}
 .earn:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--brand-soft)}
 .earn .ei{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:26px;flex:none;background:var(--brand-soft)}
+.earn .ev{min-width:0;flex:1}
 .earn .ev b{font-size:15px;display:block}
 .earn .ev small{font-size:13px;color:var(--ink-3)}
 .earn .coins{margin-left:auto;font-weight:900;color:var(--brand);font-size:17px;white-space:nowrap}
@@ -422,9 +423,16 @@ html[lang="bn"] [lang-bn]{display:inline}
 }
 @media (max-width:640px){
   section{padding:48px 0}
-  .steps,.fgrid,.tst-grid,.fcols{grid-template-columns:1fr}
-  /* keep dense sections 2-up on phones to cut page length */
-  .strip-grid,.tgrid,.games-grid,.earn-grid,.pgrid,.livenow .pgrid{grid-template-columns:repeat(2,1fr)}
+  /* horizontal reward cards read best full-width on phones */
+  .steps,.fgrid,.tst-grid,.fcols,.earn-grid{grid-template-columns:1fr}
+  /* vertical-content grids stay 2-up; minmax(0,1fr) + min-width:0 lets tracks AND items shrink so cards never overflow */
+  .strip-grid,.tgrid,.games-grid,.pgrid,.livenow .pgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .strip-grid>*,.tgrid>*,.games-grid>*,.pgrid>*,.livenow .pgrid>*{min-width:0}
+  /* compact the big game + trust cards so 2-up reads well on phones */
+  .game{padding:16px;min-height:152px}
+  .game .gi{font-size:30px;margin-bottom:8px}.game h3{font-size:15px}.game p{font-size:12px}
+  .game .gtag{top:12px;right:12px}
+  .tcard{padding:18px}.tcard .ti{font-size:30px}
   .neta,.aud,.cta{padding:30px}.hero-stats{gap:20px}
   .nav-cta .btn-primary{display:none}
   .subnav{top:64px}.nav{height:64px}
@@ -432,7 +440,7 @@ html[lang="bn"] [lang-bn]{display:inline}
   .pd{padding-bottom:90px}
   .pc-img{height:130px;font-size:48px}
 }
-@media (max-width:420px){ .pgrid{grid-template-columns:1fr 1fr} .pc-name{font-size:13px} .pc-now{font-size:17px} }
+@media (max-width:420px){ .pgrid{grid-template-columns:repeat(2,minmax(0,1fr))} .pc-name{font-size:13px} .pc-now{font-size:17px} .pc-img{height:120px;font-size:42px} .pc-body{padding:11px} }
 
 /* ============================================================
    VISUAL POLISH — make every section pop (no layout/width change)
